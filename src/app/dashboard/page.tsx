@@ -14,7 +14,9 @@ export default async function DashboardPage() {
         discordId={session.discord_id}
       />
       <main className="flex-1 flex items-center justify-center">
-        <p className="text-[#8b7355] italic">Portail en construction…</p>
+        <p className="text-[#6b6560] text-sm uppercase tracking-widest">
+          Portail en construction
+        </p>
       </main>
     </div>
   );
