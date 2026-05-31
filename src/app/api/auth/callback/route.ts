@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const base = process.env.NEXT_PUBLIC_BASE_URL!;
 
   if (error || !code) {
-    return NextResponse.redirect(`${base}/?error=oauth_denied`);
+    return NextResponse.redirect(`${base}/refused?reason=oauth_denied`);
   }
 
   try {
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 
     const isMember = await isGuildMember(access_token, process.env.DISCORD_GUILD_ID!);
     if (!isMember) {
-      return NextResponse.redirect(`${base}/?error=not_member`);
+      return NextResponse.redirect(`${base}/refused?reason=not_member`);
     }
 
     const sessionToken = await createSession({
@@ -34,6 +34,6 @@ export async function GET(request: NextRequest) {
     return response;
   } catch (err) {
     console.error("OAuth callback error:", err);
-    return NextResponse.redirect(`${base}/?error=server_error`);
+    return NextResponse.redirect(`${base}/refused?reason=server_error`);
   }
 }
