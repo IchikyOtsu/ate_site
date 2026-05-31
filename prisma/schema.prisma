@@ -11,12 +11,25 @@ model Character {
   id               String   @id @default(uuid())
   discord_id       String   @unique
   discord_username String
-  character_name   String
+
+  // Identité
+  nom              String
   age              Int
-  race             String
   faction          String
-  background       String
-  personality      String
+  corporation      String
+  grade            String
+
+  // Descriptions
+  description      String
+  psychologie      String
+  historique       String
+
+  // Compétences (1-5)
+  combat           Int
+  survie           Int
+  diplomatie       Int
+  technique        Int
+
   status           String   @default("pending")
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
