@@ -15,6 +15,7 @@ model Character {
   // Identité
   nom              String
   age              Int
+  genre            String
   faction          String
   corporation      String
   grade            String
@@ -41,4 +42,15 @@ model Character {
   prefix            String?  @db.VarChar(20)
 
   @@map("characters")
+}
+
+// Rôles utilisateurs — partagé avec le bot
+// role : "member" | "admin" | "moderator"
+model UserRole {
+  discord_id String   @id
+  role       String   @default("member")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("user_roles")
 }

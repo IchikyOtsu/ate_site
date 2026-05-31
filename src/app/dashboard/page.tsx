@@ -64,23 +64,33 @@ function EmptyState() {
 
 function CharacterSheet({ character }: {
   character: {
-    nom: string; age: number; faction: string; corporation: string; grade: string;
+    nom: string; age: number; genre: string; faction: string; corporation: string; grade: string;
     description: string; psychologie: string; historique: string;
     combat: number; survie: number; diplomatie: number; technique: number;
-    status: string; created_at: Date;
+    status: string; created_at: Date; image_data: Uint8Array | null;
   };
 }) {
   return (
     <div className="space-y-8">
       {/* En-tête */}
       <div className="flex items-start justify-between gap-4 border-b border-[#2a2520] pb-6">
-        <div>
-          <h1 className="text-3xl font-black uppercase tracking-[0.1em] text-[#d4cfc8]">
-            {character.nom}
-          </h1>
-          <p className="text-[#6b6560] text-xs uppercase tracking-widest mt-1">
-            {character.grade} — {character.faction}
-          </p>
+        <div className="flex items-center gap-4">
+          {character.image_data && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/api/avatar"
+              alt="Avatar"
+              className="w-16 h-16 object-cover border border-[#2a2520] flex-shrink-0"
+            />
+          )}
+          <div>
+            <h1 className="text-3xl font-black uppercase tracking-[0.1em] text-[#d4cfc8]">
+              {character.nom}
+            </h1>
+            <p className="text-[#6b6560] text-xs uppercase tracking-widest mt-1">
+              {character.grade} — {character.faction}
+            </p>
+          </div>
         </div>
         <StatusBadge status={character.status} />
       </div>
@@ -89,6 +99,7 @@ function CharacterSheet({ character }: {
       <Section title="Identité">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <InfoField label="Âge" value={`${character.age} ans`} />
+          <InfoField label="Genre" value={character.genre} />
           <InfoField label="Faction" value={character.faction} />
           <InfoField label="Grade" value={character.grade} />
         </div>

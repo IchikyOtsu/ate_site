@@ -6,6 +6,7 @@ import { z } from "zod";
 const schema = z.object({
   nom: z.string().min(2).max(60),
   age: z.number().int().min(1).max(150),
+  genre: z.enum(["Homme", "Femme"]),
   faction: z.string().min(1).max(80),
   corporation: z.string().max(80),
   grade: z.string().min(1).max(80),
