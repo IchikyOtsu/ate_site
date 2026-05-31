@@ -1,6 +1,7 @@
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/admin";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
@@ -11,9 +12,10 @@ export default async function DashboardPage() {
   const session = await getSession();
   if (!session) redirect("/");
 
-  const character = await prisma.character.findUnique({
-    where: { discord_id: session.discord_id },
-  });
+  const [character, admin] = await Promise.all([
+    prisma.character.findUnique({ where: { discord_id: session.discord_id } }),
+    isAdmin(),
+  ]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -21,6 +23,7 @@ export default async function DashboardPage() {
         username={session.discord_username}
         avatar={session.avatar}
         discordId={session.discord_id}
+        admin={admin}
       />
 
       {/* Background image layer */}

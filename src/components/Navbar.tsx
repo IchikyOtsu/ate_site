@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface Props {
   username: string;
   avatar: string | null;
   discordId: string;
+  admin?: boolean;
 }
 
-export default function Navbar({ username, avatar, discordId }: Props) {
+export default function Navbar({ username, avatar, discordId, admin }: Props) {
   const router = useRouter();
 
   async function handleLogout() {
@@ -25,9 +27,16 @@ export default function Navbar({ username, avatar, discordId }: Props) {
   return (
     <nav className="border-b border-[#c0522a]/30 bg-[#1a1814] px-6 py-3">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
-        <span className="text-[#c0522a] font-black tracking-[0.15em] uppercase">
-          After The End
-        </span>
+        <div className="flex items-center gap-6">
+          <Link href="/dashboard" className="text-[#c0522a] font-black tracking-[0.15em] uppercase hover:text-[#e0693a] transition-colors">
+            After The End
+          </Link>
+          {admin && (
+            <Link href="/admin" className="text-[#6b6560] hover:text-[#d4cfc8] text-xs uppercase tracking-widest transition-colors">
+              Panel admin
+            </Link>
+          )}
+        </div>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">

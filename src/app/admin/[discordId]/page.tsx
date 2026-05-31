@@ -36,7 +36,7 @@ export default async function AdminInspectPage({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar username={session.discord_username} avatar={session.avatar} discordId={session.discord_id} />
+      <Navbar username={session.discord_username} avatar={session.avatar} discordId={session.discord_id} admin />
       <main className="flex-1 py-10 px-4">
         <div className="max-w-3xl mx-auto space-y-8">
 
