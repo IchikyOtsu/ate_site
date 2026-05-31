@@ -34,5 +34,11 @@ model Character {
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
+  // Champs bot Discord
+  image_data        Bytes?
+  avatar_message_id BigInt?
+  avatar_channel_id BigInt?
+  prefix            String?  @db.VarChar(20)
+
   @@map("characters")
 }
